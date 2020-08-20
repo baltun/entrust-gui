@@ -27,7 +27,7 @@ class User extends Authenticatable implements CanResetPasswordContract, Validati
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'department_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -48,6 +48,7 @@ class User extends Authenticatable implements CanResetPasswordContract, Validati
         'updating' => [
             'email'      => 'required|email|unique:users',
             'password'   => '',
+            'department_id' => '',
         ],
     ];
 }

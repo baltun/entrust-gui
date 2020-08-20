@@ -16,8 +16,16 @@ Route::group(
         Route::get('roles/create', ['uses' => 'RolesController@create', 'as' => 'entrust-gui::roles.create']);
         Route::post('roles', ['uses' => 'RolesController@store', 'as' => 'entrust-gui::roles.store']);
         Route::get('roles/{id}/edit', ['uses' => 'RolesController@edit', 'as' => 'entrust-gui::roles.edit']);
+        Route::get('roles/{id}/roles_u', ['uses' => 'RolesController@users', 'as' => 'entrust-gui::roles.users']);
         Route::put('roles/{id}', ['uses' => 'RolesController@update', 'as' => 'entrust-gui::roles.update']);
         Route::delete('roles/{id}', ['uses' => 'RolesController@destroy', 'as' => 'entrust-gui::roles.destroy']);
+
+        Route::get('departments', ['uses' => 'DepartmentsController@index', 'as' => 'entrust-gui::departments.index']);
+        Route::get('departments/create', ['uses' => 'DepartmentsController@create', 'as' => 'entrust-gui::departments.create']);
+        Route::post('departments', ['uses' => 'DepartmentsController@store', 'as' => 'entrust-gui::departments.store']);
+        Route::get('departments/{id}/edit', ['uses' => 'DepartmentsController@edit', 'as' => 'entrust-gui::departments.edit']);
+        Route::put('departments/{id}', ['uses' => 'DepartmentsController@update', 'as' => 'entrust-gui::departments.update']);
+        Route::delete('departments/{id}', ['uses' => 'DepartmentsController@destroy', 'as' => 'entrust-gui::departments.destroy']);
 
         Route::get('permissions', ['uses' => 'PermissionsController@index', 'as' => 'entrust-gui::permissions.index']);
         Route::get(
