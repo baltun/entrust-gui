@@ -14,13 +14,13 @@ use Illuminate\Config\Repository as Config;
  * @license MIT
  * @package Acoustep\EntrustGui
  */
-class UsersController extends Controller
+class DepartmentsController extends Controller
 {
 
-    protected $gateway;
-    protected $request;
-    protected $role;
-    protected $config;
+//    protected $gateway;
+//    protected $request;
+//    protected $role;
+//    protected $config;
 
     /**
      * Create a new UsersController instance.
@@ -31,14 +31,14 @@ class UsersController extends Controller
      *
      * @return void
      */
-    public function __construct(Request $request, UserGateway $gateway, Config $config)
-    {
-        $this->config = $config;
-        $this->request = $request;
-        $this->gateway = $gateway;
-        $role_class = $this->config->get('entrust.role');
-        $this->role = new $role_class;
-    }
+//    public function __construct(Request $request, UserGateway $gateway, Config $config)
+//    {
+//        $this->config = $config;
+//        $this->request = $request;
+//        $this->gateway = $gateway;
+//        $role_class = $this->config->get('entrust.role');
+//        $this->role = new $role_class;
+//    }
 
     /**
      * Display a listing of the resource.
@@ -48,12 +48,12 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = $this->gateway->paginate($this->config->get('entrust-gui.pagination.users'));
+        $departments = Departments::all();
 
         return view(
-            'entrust-gui::users.index',
+            'entrust-gui::departments.index',
             compact(
-                'users'
+                'departments'
             )
         );
     }
@@ -66,16 +66,19 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $user_class = $this->config->get('auth.providers.users.model');
-        $user = new $user_class;
-        $roles = $this->role->pluck('name', 'id');
+//        $user_class = $this->config->get('auth.providers.users.model');
+//        $user = new $user_class;
+//        $roles = $this->role->pluck('name', 'id');
+        $department = new Departments();
 
         return view(
-            'entrust-gui::users.create',
+            'entrust-gui::departments.create',
             compact(
-                'user',
-                'roles'
+//                'user',
+//                'roles'
+                'department'
             )
+
         );
     }
 
@@ -85,17 +88,19 @@ class UsersController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
         try {
-            $user = $this->gateway->create($this->request);
+            $department = new Departments();
+            $department->name = $request->name;
+            $department->save();
         } catch (ValidationException $e) {
             return redirect(route('entrust-gui::users.create'))
                 ->withErrors($e->getErrors())
                 ->withInput();
         }
-        return redirect(route('entrust-gui::users.index'))
-            ->withSuccess(trans('entrust-gui::users.created'));
+        return redirect(route('entrust-gui::departments.index'))
+            ->withSuccess(trans('entrust-gui::departments.created'));
   
     }
 
@@ -109,17 +114,12 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->gateway->find($id);
-        $roles = $this->role->pluck('name', 'id');
-
-        $departments = Departments::all();
+        $department = Departments::where('id', $id)->first();
 
         return view(
-            'entrust-gui::users.edit',
+            'entrust-gui::departments.edit',
             compact(
-                'user',
-                'roles',
-                'departments'
+                'department'
             )
         );
   
@@ -133,15 +133,17 @@ class UsersController extends Controller
      *
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         try {
-            $this->gateway->update($this->request, $id);
+            $department = Departments::find($id);
+            $department->name = $request->name;
+            $department->save();
         } catch (ValidationException $e) {
             return back()->withErrors($e->getErrors())->withInput();
         }
-        return redirect(route('entrust-gui::users.index'))
-            ->withSuccess(trans('entrust-gui::users.updated'));
+        return redirect(route('entrust-gui::departments.index'))
+            ->withSuccess(trans('entrust-gui::departments.updated'));
     }
 
     /**
@@ -154,8 +156,10 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $this->gateway->delete($id);
-        return redirect(route('entrust-gui::users.index'))
-            ->withSuccess(trans('entrust-gui::users.destroyed'));
+        $department = Departments::find($id);
+        $department->delete();
+
+        return redirect(route('entrust-gui::departments.index'))
+            ->withSuccess(trans('entrust-gui::departments.destroyed'));
     }
 }

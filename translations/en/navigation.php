@@ -2,4 +2,5 @@
     'users' => 'Users',
     'roles' => 'Roles',
     'permissions' => 'Permissions',
+    'departments' => 'Departments',
 ];
