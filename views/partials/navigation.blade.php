@@ -16,7 +16,8 @@
       <ul class="nav navbar-nav">
         <li class="{{ (Request::is('*users*') ? 'active' : '') }}"><a href="{{ route('entrust-gui::users.index') }}">{{ trans('entrust-gui::navigation.users') }}</a></li>
         <li class="{{ (Request::is('*roles*') ? 'active' : '') }}"><a href="{{ route('entrust-gui::roles.index') }}">{{ trans('entrust-gui::navigation.roles') }}</a></li>
-        <li class="{{ (Request::is('*permissions*') ? 'active' : '') }}"><a href="{{ route('entrust-gui::permissions.index') }}">{{ trans('entrust-gui::navigation.permissions') }}</a></li>
+        <li class="{{ (Request::is('*departments*') ? 'active' : '') }}"><a href="{{ route('entrust-gui::departments.index') }}">{{ trans('entrust-gui::navigation.departments') }}</a></li>
+        {{--        <li class="{{ (Request::is('*permissions*') ? 'active' : '') }}"><a href="{{ route('entrust-gui::permissions.index') }}">{{ trans('entrust-gui::navigation.permissions') }}</a></li>--}}
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

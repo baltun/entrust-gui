@@ -24,6 +24,15 @@
 </div>
 @endif
 <div class="form-group">
+    <label for="department">Department</label>
+    <select name="department_id" id="department_id" class="form-control">
+        <option value="">---</option>
+        @foreach($departments as $department)
+            <option value="{{ $department->id }}" {{ ((in_array($department->id, old('department', []))) || ( ! Session::has('errors') && $user->department_id == $department->id)) ? 'selected' : '' }}>{{ $department->name }}</option>
+        @endforeach
+    </select>
+</div>
+<div class="form-group">
     <label for="roles">Roles</label>
     <select name="roles[]" id="roles" multiple class="form-control">
         @foreach($roles as $index => $role)
