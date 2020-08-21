@@ -1,13 +1,13 @@
 {
-    "name": "acoustep/entrust-gui",
+    "name": "baltun/entrust-gui",
     "description": "A GUI for the Entrust package.",
     "keywords": ["laravel","illuminate","auth","roles","acl","permission","gui"],
-    "homepage": "https://github.com/acoustep/entrust-gui",
+    "homepage": "https://github.com/baltun/entrust-gui",
     "license": "MIT",
     "authors": [
         {
             "name": "Mitch Stanley",
-            "email": "acoustep+entrustgui@fastmail.co.uk"
+            "email": "baltun+entrustgui@fastmail.co.uk"
         }
     ],
     "require": {
