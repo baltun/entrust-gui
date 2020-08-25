@@ -11,6 +11,7 @@
     <label for="description">Description</label>
     <input type="input" class="form-control" id="description" placeholder="Description" name="description" value="{{ (Session::has('errors')) ? old('description', '') : $model->description }}">
 </div>
+{{--
 <div class="form-group">
     <label for="permissions">Permissions</label>
     <select name="permissions[]" multiple class="form-control">
