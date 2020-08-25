@@ -70,11 +70,14 @@ class UsersController extends Controller
         $user = new $user_class;
         $roles = $this->role->pluck('name', 'id');
 
+        $departments = Departments::all();
+
         return view(
             'entrust-gui::users.create',
             compact(
                 'user',
-                'roles'
+                'roles',
+                'departments'
             )
         );
     }
