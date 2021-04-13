@@ -9,7 +9,9 @@
 <table class="table table-striped">
   <tr>
     <th>Name</th>
-    <th>Email</th>
+    <th>Email <a href="mailto:
+    @foreach($users as $user){{ $user->email }}@if (!$loop->last),@endif @endforeach
+" class="btn btn-primary"><i class="fa fa-at fa-si"></i></a></th>
     <th>Department</th>
     <th>Actions</th>
   </tr>
