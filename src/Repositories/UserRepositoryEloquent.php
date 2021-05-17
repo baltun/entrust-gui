@@ -54,12 +54,13 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         $defaults = ['roles' => []];
         $attributes = array_merge($defaults, $attributes);
         $model = parent::create($attributes);
-        if ( ! $this->passwordHashIsImplemented($model)) {
-            throw new Exception(
-                "User model must implement either Acoustep\Contracts\HashMethodInterface or Esensi\Model\Contracts\HashingModelInterface.
-                Revert to 0.3.* or see upgrade guide for details."
-            );
-        }
+//        dd('here2');
+//        if ( ! $this->passwordHashIsImplemented($model)) {
+//            throw new Exception(
+//                "User model must implement either Acoustep\Contracts\HashMethodInterface or Esensi\Model\Contracts\HashingModelInterface.
+//                Revert to 0.3.* or see upgrade guide for details."
+//            );
+//        }
         if(in_array('Acoustep\EntrustGui\Contracts\HashMethodInterface', class_implements($model))) {
             $model->entrustPasswordHash();
         }
@@ -80,12 +81,12 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         $defaults = ['roles' => []];
         $attributes = array_merge($defaults, $attributes);
         $model = $this->find($id);
-        if ( ! $this->passwordHashIsImplemented($model)) {
-            throw new Exception(
-                "User model must implement either Acoustep\EntrustGui\Contracts\HashMethodInterface or Esensi\Model\Contracts\HashingModelInterface.
-                Revert to 0.3.* or see upgrade guide for details."
-            );
-        }
+//        if ( ! $this->passwordHashIsImplemented($model)) {
+//            throw new Exception(
+//                "User model must implement either Acoustep\EntrustGui\Contracts\HashMethodInterface or Esensi\Model\Contracts\HashingModelInterface.
+//                Revert to 0.3.* or see upgrade guide for details."
+//            );
+//        }
         if (! array_key_exists('password', $attributes)) {
             $model->fill($attributes);
             if (Config::get('entrust-gui.confirmable') === true) {

@@ -44,7 +44,7 @@ class UserGateway implements ManyToManyGatewayInterface
     {
         $this->config = $config;
         $this->repository = $repository;
-        $role_class = $this->config->get('entrust.role');
+        $role_class = $this->config->get('entrust.models.role');
         $this->role = new $role_class;
         $this->dispatcher = $dispatcher;
         $this->hash = $hash;

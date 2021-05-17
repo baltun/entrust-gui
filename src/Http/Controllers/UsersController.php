@@ -36,7 +36,7 @@ class UsersController extends Controller
         $this->config = $config;
         $this->request = $request;
         $this->gateway = $gateway;
-        $role_class = $this->config->get('entrust.role');
+        $role_class = $this->config->get('entrust.models.role');
         $this->role = new $role_class;
     }
 
@@ -90,6 +90,7 @@ class UsersController extends Controller
      */
     public function store()
     {
+
         try {
             $user = $this->gateway->create($this->request);
         } catch (ValidationException $e) {
